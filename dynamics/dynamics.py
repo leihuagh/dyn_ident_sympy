@@ -123,7 +123,7 @@ class Dynamics:
         vprint(sympy.simplify(A*sympy.Matrix(self.rbt_def.bary_params) - sympy.Matrix(self.tau)))
 
         input_vars = tuple(self.rbt_def.coordinates + self.rbt_def.d_coordinates + self.rbt_def.dd_coordinates)
-        vprint('input_vars', input_vars)
+        print('input_vars', input_vars)
         self.H_func = sympy.lambdify(input_vars, self.H)
         vprint(self.H_func)
         start_time = time.time()
