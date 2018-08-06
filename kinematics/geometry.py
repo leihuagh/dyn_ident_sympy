@@ -44,13 +44,20 @@ class Geometry:
             self.R[num] = self.T_0n[num][0:3, 0:3]
             self.p_n[num] = self.T_0n[num][0:3, 3]
             self.T_0nc[num] = sympy.sympify(self.T_0n[num] * tranlation_transfmat(self.rbt_df.r_by_ml[num]))
+
             vprint('pos_c{}'.format(num))
             self.p_c[num] = self.T_0nc[num][0:3, 3]
             vprint('v_cw{}'.format(num))
 
             v_cw = sympy.diff(self.p_c[num].subs(self.rbt_df.subs_q2qt), t)
             v_cw = v_cw.subs(self.rbt_df.subs_dqt2dq + self.rbt_df.subs_qt2q)
-            self.v_cw[num] = sympy.simplify(v_cw)
+
+            # use trigsimp to make it faster, the results are the same
+            self.v_cw[num] = sympy.trigsimp(v_cw)
+            # self.v_cw[num] = sympy.simplify(v_cw)
+
+            # v_cw_trigsim = sympy.trigsimp(v_cw)
+            # print("sim dif of w_b: {}".format(v_cw_trigsim - v_cw_trigsim))
 
             R_t = self.R[num].subs(self.rbt_df.subs_q2qt)
             vprint('dR_t{}'.format(num))
@@ -61,7 +68,11 @@ class Geometry:
             # w_w = sympy.trigsimp(so32vec(dR*self.R.transpose()))
             # print('w_w: ', w_w)
             vprint('w_b')
-            self.w_b[num] = sympy.simplify(so32vec(self.R[num].transpose() * dR))
+            # use trigsimp to make it faster, the results are the same
+            self.w_b[num] = sympy.trigsimp(so32vec(self.R[num].transpose() * dR))
+            #self.w_b[num] = sympy.simplify(so32vec(self.R[num].transpose() * dR))
+            # w_b_trigsim = sympy.trigsimp(so32vec(self.R[num].transpose() * dR))
+            # print("sim dif of w_b: {}".format(self.w_b[num] - w_b_trigsim))
         vprint('pos_c')
         vprint(self.p_c)
         vprint('v_cw')

@@ -25,7 +25,7 @@ else:
 class Dynamics:
     def __init__(self, rbt_def, geom, g=[0, 0, -9.81], verbose=False):
         self.rbt_def = rbt_def
-        self._geom = geom
+        self.geom = geom
         self._g = np.matrix(g)
 
         self._calc_dyn()
@@ -50,10 +50,10 @@ class Dynamics:
         for num in self.rbt_def.link_nums[1:]:
             k_e_n = 0
             if self.rbt_def.use_inertia[num]:
-                p_e += -self.rbt_def.m[num] * self._geom.p_c[num].dot(self._g)
+                p_e += -self.rbt_def.m[num] * self.geom.p_c[num].dot(self._g)
 
-                k_e_n = self.rbt_def.m[num] * self._geom.v_cw[num].dot(self._geom.v_cw[num])/2 +\
-                       (self._geom.w_b[num].transpose() * self.rbt_def.I_by_Llm[num] * self._geom.w_b[num])[0, 0]/2
+                k_e_n = self.rbt_def.m[num] * self.geom.v_cw[num].dot(self.geom.v_cw[num])/2 +\
+                       (self.geom.w_b[num].transpose() * self.rbt_def.I_by_Llm[num] * self.geom.w_b[num])[0, 0]/2
                 k_e_n = sympy.simplify(k_e_n)
 
             # if self.rbt_def.use_Ia[num]:
@@ -86,6 +86,7 @@ class Dynamics:
             vprint(dL_dq)
 
             tau.append(sympy.simplify(dk_ddq_dt - dL_dq))
+            #tau.append(dk_ddq_dt - dL_dq)
 
         print("Adding frictions and motor rotor inertia...")
         for i in range(self.rbt_def.frame_num):
