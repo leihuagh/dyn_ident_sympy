@@ -200,7 +200,7 @@ class TrajOptimizer:
         slsqp = pyOpt.pySLSQP.SLSQP()
 
         #Radian shit
-        slsqp = pyOpt.pyPSQP.PSQP()
+        #slsqp = pyOpt.pyPSQP.PSQP()
 
         slsqp.setOption('IPRINT', 0)
         #slsqp.setOption()
