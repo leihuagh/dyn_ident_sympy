@@ -197,10 +197,10 @@ class TrajOptimizer:
         # print(self._opt_prob)
         #x = np.random.random((self._dyn.rbt_def.dof * (2*self._order+1)))
         #print(self._obj_func(x))
-        slsqp = pyOpt.pySLSQP.SLSQP()
+        #slsqp = pyOpt.pySLSQP.SLSQP()
 
         #Radian shit
-        #slsqp = pyOpt.pyPSQP.PSQP()
+        slsqp = pyOpt.pyPSQP.PSQP()
 
         slsqp.setOption('IPRINT', 0)
         #slsqp.setOption()
