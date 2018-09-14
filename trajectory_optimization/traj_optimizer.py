@@ -81,7 +81,9 @@ class TrajOptimizer:
             vars_input = q[n, :].tolist() + dq[n, :].tolist() + ddq[n, :].tolist()
             self.H[n*self._dyn.dof:(n+1)*self._dyn.dof, :] = self._dyn.H_b_func(*vars_input)
 
+        self.H = self.H / np.subtract(self.H.max(axis=0), self.H.min(axis=0))
         f = np.linalg.cond(self.H)
+        #print(f)
 
         # constraint
         g = [0.0] * (self._const_num * self.sample_num)
@@ -197,10 +199,10 @@ class TrajOptimizer:
         # print(self._opt_prob)
         #x = np.random.random((self._dyn.rbt_def.dof * (2*self._order+1)))
         #print(self._obj_func(x))
-        #slsqp = pyOpt.pySLSQP.SLSQP()
+        slsqp = pyOpt.pySLSQP.SLSQP()
 
         #Radian shit
-        slsqp = pyOpt.pyPSQP.PSQP()
+        #slsqp = pyOpt.pyPSQP.PSQP()
 
         slsqp.setOption('IPRINT', 0)
         #slsqp.setOption()
