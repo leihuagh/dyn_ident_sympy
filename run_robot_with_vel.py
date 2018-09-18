@@ -10,14 +10,14 @@ import errno
 
 
 # Fist, several things we have to define before running it
-# modelname = 'test_psm_long'
-modelname = 'psm_no_off_minert'
+modelname = 'test_psm_long3'
+#modelname = 'psm_no_off_minert'
 # modelname = 'mtm_3links_parallel'
 # modelname = 'mtm_4links_parallel'
 
 # testname = 'one'
 # testname = 'two'
-testname = 'two'
+testname = 'three'
 
 # robotname = 'PSM1'
 robotname = 'PSM1'
