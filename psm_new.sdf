@@ -36,15 +36,15 @@
     <link name="yaw_Link">
       <pose frame="">0 0 0 -1.57079 -1.57079 3.14159</pose>
       <inertial>
-        <pose frame="">-0.0135859574008 0.00478440248423 1.40492515923e-20 0 -0 0</pose>
-        <mass>0.5000595627320654</mass>
+        <pose frame="">-0.014562576725 -0.00524249528894 1.60605824426e-19 0 -0 0</pose>
+        <mass>1.4999985386443357</mass>
         <inertia>
-          <ixx>25.7390484183</ixx>
-          <ixy>1.07486174669</ixy>
-          <ixz>1.61901785097e-18</ixz>
-          <iyy>73.3841429489</iyy>
-          <iyz>5.43742483502e-18</iyz>
-          <izz>0.00259265277504</izz>
+          <ixx>146.492207231226</ixx>
+          <ixy>-141.680586287202</ixy>
+          <ixz>1.85437080316714e-17</ixz>
+          <iyy>248.089932602168</iyy>
+          <iyz>-4.62874228798788e-17</iyz>
+          <izz>0.00351781647881753</izz>
         </inertia>
       </inertial>
       <collision name="yaw_Link_collision">
@@ -87,16 +87,16 @@
     <link name="pitch_back_Link">
       <pose frame="">0 -0.0296 0 1.57081 -1.28007 -1.5708</pose>
       <inertial>
-        <pose frame="">-0.0312086244015 -0.00876552845787 -0.00582022580812 0 -0 0</pose>
+        <pose frame="">-0.100980279445 -0.00959929425212 -0.00993564946671 0 -0 0</pose>
         
-        <mass>1.500141319120808</mass>
+        <mass>1.5000712806654202</mass>
         <inertia>
-          <ixx>0.002078304379</ixx>
-          <ixy>0.0011901125136</ixy>
-          <ixz>0.000386743430594</ixz>
-          <iyy>8.22408027701e-05</iyy>
-          <iyz>0.000909713694266</iyz>
-          <izz>0.0117703004594</izz>
+          <ixx>0.00230492095552235</ixx>
+          <ixy>-0.000744361546911101</ixy>
+          <ixz>0.00321976095457358</ixz>
+          <iyy>0.00348852529798563</iyy>
+          <iyz>0.00286715144513410</iyz>
+          <izz>0.00269298941638152</izz>
         </inertia>
       </inertial>
       <collision name="pitch_back_Link_collision">
@@ -136,18 +136,69 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
+     <link name="counterweight_Link">
+      <pose frame="">-0 -0.1296 -0 5e-06 -2.6e-05 1.57079</pose>
+      <inertial>
+        <pose frame="">-0.010832766304 0.0605111914241 0.00815691571644 0 -0 0</pose>
+        <mass>0.39241050954435797</mass>
+        <inertia>
+          <ixx>0.00353419300776816</ixx>
+          <ixy>0.00290201729139431</ixy>
+          <ixz>7.25139570379327e-5</ixz>
+          <iyy>0.00242248888023060</iyy>
+          <iyz>-0.000186539388548878</iyz>
+          <izz>1006.87356158912</izz>
+        </inertia>
+      </inertial>
+      <collision name="counterweight_Link_collision">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://PSM/meshes/counterweight_Link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="counterweight_Link_visual">
+        <pose frame="">0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://PSM/meshes/counterweight_Link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="counterweight_joint" type="prismatic">
+      <child>counterweight_Link</child>
+      <parent>pitch_back_Link</parent>
+      <axis>
+        <xyz>5e-06 -2.6e-05 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0.15</upper>
+          <effort>1000</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
     <link name="pitch_bottom_Link">
       <pose frame="">-0 -0.072598 0.143705 -1.5708 -2.6e-05 1.5708</pose>
       <inertial>
-        <pose frame="">-1.30933617056e-06 0.0306333912282 0.00529110644269 0 -0 0</pose>
-        <mass>0.019462555863818884</mass>
+        <pose frame="">9.64855251594e-07 -0.0108229904233 -0.0087156950871 0 -0 0</pose>
+        <mass>0.020144727018997104</mass>
         <inertia>
-          <ixx>0.00262149257305</ixx>
-          <ixy>8.41195740181e-10</ixy>
-          <ixz>2.6403294956e-10</ixz>
-          <iyy>72.3397921876</iyy>
-          <iyz>16.9173223277</iyz>
-          <izz>87.0028394056</izz>
+          <ixx>0.00351990398456405</ixx>
+          <ixy>-3.33105642663336e-10</ixy>
+          <ixz>-3.65088557873375e-10</ixz>
+          <iyy>114.412561534684</iyy>
+          <iyz>49.4511710589220</iyz>
+          <izz>215.138277220443</izz>
         </inertia>
       </inertial>
       <collision name="pitch_bottom_Link_collision">
@@ -190,16 +241,16 @@
     <link name="pitch_end_Link">
       <pose frame="">-0 0.443402 0.143719 -1.5708 -2.6e-05 1.5708</pose>
       <inertial>
-        <pose frame="">0.0693490842112 0.219074121622 0.00283407549509 0 -0 0</pose>
+        <pose frame="">0.162143513695 0.00087206451589 -0.0152753670355 0 -0 0</pose>
         
-        <mass>0.009735009858086972</mass>
+        <mass>0.010020416625735289</mass>
         <inertia>
-          <ixx>0.000196255087522</ixx>
-          <ixy>0.000436088930915</ixy>
-          <ixz>0.000994561559283</ixz>
-          <iyy>0.00258199509082</iyy>
-          <iyz>0.000101552489171</iyz>
-          <izz>0.0121727430654</izz>
+          <ixx>0.0123761336166972</ixx>
+          <ixy>-0.0123029883349794</ixy>
+          <ixz>-0.00990278563278557</ixz>
+          <iyy>0.0242954923102975</iyy>
+          <iyz>0.0176325434190393</iyz>
+          <izz>0.0209474455709598</izz>
         </inertia>
       </inertial>
       <collision name="pitch_end_Link_collision">
@@ -242,17 +293,15 @@
     <link name="main_insertion_Link">
       <pose frame="">-1e-06 0.486395 0.43181 -3.14159 1.9e-05 -1.5708</pose>
       <inertial>
-        <pose frame="">0.131833294978 -1.74400500973 0.485357376645 0 -0 0</pose>
-        <mass>0.049362827222935036</mass>
+        <pose frame="">0.127645725169 -0.0217124867738 0.0166546898625 0 -0 0</pose>
+        <mass>0.3074732925945299</mass>
         <inertia>
-          
-
-          <ixx>0.0730964910782</ixx>
-          <ixy>0.00594770562795</ixy>
-          <ixz>0.000999004174498</ixz>
-          <iyy>0.000726566558674</iyy>
-          <iyz>0.00585284362105</iyz>
-          <izz>0.0242513233653</izz>
+          <ixx>0.00317126276369146</ixx>
+          <ixy>0.00214852378424295</ixy>
+          <ixz>0.00532495130392996</ixz>
+          <iyy>0.00490642655122446</iyy>
+          <iyz>-0.00412805787075258</iyz>
+          <izz>0.0188353814208078</izz>
         </inertia>
       </inertial>
       <collision name="main_insertion_Link_collision">
@@ -296,7 +345,6 @@
       <pose frame="">2e-06 0.486403 0.01561 3.14159 -1.9e-05 1.57079</pose>
       <inertial>
         <pose frame="">-0 -0 -0.005823 0 -0 0</pose>
-        
         <mass>0.012491</mass>
         <inertia>
           <ixx>0.001</ixx>
@@ -562,15 +610,15 @@
     <link name="pitch_top_Link">
       <pose frame="">-0 -0.068718 0.18 -1.5708 -2.6e-05 1.5708</pose>
       <inertial>
-        <pose frame="">-3.66826957797e-06 0.0853897734053 0.0012940064704 0 -0 0</pose>
-        <mass>0.009350153752889572</mass>
+        <pose frame="">0.499261455011 -0.0298663476127 -0.00583983648634 0 -0 0</pose>
+        <mass>0.010210429034084515</mass>
         <inertia>
-          <ixx>0.00265214302176</ixx>
-          <ixy>3.07453690438e-09</ixy>
-          <ixz>4.29833136945e-10</ixz>
-          <iyy>71.6994455176</iyy>
-          <iyz>15.4313403366</iyz>
-          <izz>100.840824549</izz>
+          <ixx>0.00351537483052178</ixx>
+          <ixy>-0.000241225696511597</ixy>
+          <ixz>-0.000129866269417167</ixz>
+          <iyy>89.5191657729137</iyy>
+          <iyz>52.7133028317604</iyz>
+          <izz>241.797019646115</izz>
         </inertia>
       </inertial>
       <collision name="pitch_top_Link_collision">
@@ -613,15 +661,15 @@
     <link name="pitch_front_Link">
       <pose frame="">-0 0.0664 -0 1.57081 -1.28007 -1.5708</pose>
       <inertial>
-        <pose frame="">-0.000915815038611 -0.00493041616031 0.00389837089547 0 -0 0</pose>
-        <mass>1.0000849392400093</mass>
+        <pose frame="">-0.000743360721006 -0.0199380655736 -0.00913554132919 0 -0 0</pose>
+        <mass>0.1499980529100466</mass>
         <inertia>
-          <ixx>0.00210315938069</ixx>
-          <ixy>0.00114144142353</ixy>
-          <ixz>0.000381525874839</ixz>
-          <iyy>8.79439325465e-05</iyy>
-          <iyz>0.000908034290497</iyz>
-          <izz>0.011754461145</izz>
+          <ixx>0.00253131629948150</ixx>
+          <ixy>-0.000794251874135346</ixy>
+          <ixz>0.000352764620827068</ixz>
+          <iyy>0.00341868677827976</iyy>
+          <iyz>0.00278047538539245</iyz>
+          <izz>0.00270691969369100</izz>
         </inertia>
       </inertial>
       <collision name="pitch_front_Link_collision">

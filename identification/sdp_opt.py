@@ -146,8 +146,8 @@ class SDPOpt:
 
         print("Solving problem...")
         self._prob = cp.Problem(self._obj, self._constraints)
-
-        result = self._prob.solve(solver=cp.SCS, verbose=True, max_iters=10000)
+        iteration_max = 50000
+        result = self._prob.solve(solver=cp.SCS, verbose=True, max_iters=iteration_max)
         # result = self._prob.solve(solver=cp.CVXOPT, verbose=True)
 
         self.x_result = self._x.value

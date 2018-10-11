@@ -32,7 +32,10 @@ def modify_sdf(rbt_def, sdp_x_std, frame_names = [], filename='psm.sdf', namespa
                 # Input Inertia
                 if rbt_def.use_inertia[i]:
                     for j in range(6):
-                        inertia[j].text = str(math.fabs(sdp_x_std[g]))
+                        if sdp_x_std[g] < 0 and (j == 3 or j == 0 or j == 5):
+                            inertia[j].text = str(0.0001)
+                        else:
+                            inertia[j].text = str(sdp_x_std[g])
                         g += 1
 
                     # Input Pose

@@ -76,10 +76,12 @@ class RobotDef:
     def _gen_coordinates(self):
         self.coordinates = []
         # self.joint_coordinate = list(range(self.frame_num))
+        self.coordinates_joint_type = []
         for num in self.link_nums:
             for s in self.dh_T[num].free_symbols:
                 if s not in self.coordinates:
                     self.coordinates += [s]
+                    self.coordinates_joint_type += [self.joint_type[num]]
         self.dof = len(self.coordinates)
         vprint(self.coordinates)
 
