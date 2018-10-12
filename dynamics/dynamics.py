@@ -107,7 +107,8 @@ class Dynamics:
             tau.append(sympy.expand(dk_ddq_dt - dL_dq))
 
         print("Adding frictions and springs...")
-        tau_csf = copy.deepcopy(tau)
+        tau_csf= tau
+        #tau_csf = copy.deepcopy(tau)
 
         for i in range(self.rbt_def.frame_num):
             dq = self.rbt_def.dq_for_frame[i]
@@ -124,7 +125,8 @@ class Dynamics:
             tau_csf[index] += -tau_k
 
         print("Add tendon coupling torque and motor inertia...")
-        tau_c = copy.deepcopy(tau_csf)
+        #tau_c = copy.deepcopy(tau_csf)
+        tau_c = tau_csf
 
         for i in range(self.rbt_def.frame_num):
             if self.rbt_def.use_Ia[i]:
