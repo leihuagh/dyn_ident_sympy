@@ -11,20 +11,23 @@ import errno
 
 # Fist, several things we have to define before running it
 # modelname = 'test_psm_long'
-modelname = 'mtm_2spring_tendon'
+#modelname = 'mtm_2spring_tendon'
 # modelname = 'mtm_3links_parallel'
 # modelname = 'mtm_4links_parallel'
 
+modelname = 'psm_simple'
 # testname = 'one'
-testname = 'one'
+testname = 'two'
 #testname = 'one'
 
-# robotname = 'PSM1'
-robotname = 'MTMR'
+robotname = 'PSM1'
+#robotname = 'MTMR'
 
-speedscale = 1
+speedscale = 0.95
 #scales = np.array([0.8, 0.8, 0.8, 1, 1, 1, 1])
-scales = np.array([0.6, 0.9, 0.95, 1, 1, 1, 1])
+
+#scales = np.array([0.8, 0.8, 0.8, 1, 1, 1])
+scales = np.array([1, 0.9, 0.95, 1, 1, 1])
 
 # wait for a short period of time before recording data
 stable_time = 5
