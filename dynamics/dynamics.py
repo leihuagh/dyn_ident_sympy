@@ -131,7 +131,7 @@ class Dynamics:
         for i in range(self.rbt_def.frame_num):
             if self.rbt_def.use_Ia[i]:
                 tau_Ia = self.rbt_def.ddq_for_frame[i] * self.rbt_def.Ia[i]
-                tau_index = self.rbt_def.dd_coordinates.index(self.rbt_def.ddq_for_frame[i])
+                tau_index = self.rbt_def.dd_coordinates.index(self.rbt_def.ddq_for_frame[i].free_symbols.pop())
                 tau_c[tau_index] += tau_Ia
                 # print("tau_Ia{}: {}".format(tau_index, tau_Ia))
 
