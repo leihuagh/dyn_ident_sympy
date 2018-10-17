@@ -17,7 +17,7 @@ import errno
 
 modelname = 'psm_simple'
 # testname = 'one'
-testname = 'six'
+testname = 'one'
 #testname = 'one'
 
 robotname = 'PSM1'
