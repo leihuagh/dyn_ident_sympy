@@ -28,6 +28,9 @@ robotname = 'PSM1'
 #robotname = 'MTMR'
 
 speedscale = 0.9
+
+coupling = np.array([])
+coupling = np.array([[1.0186, 0, 0], [-.8306, .6089, .6089], [0, -1.2177, 1.2177]])
 #scales = np.array([0.8, 0.8, 0.8, 1, 1, 1, 1])
 
 #scales = np.array([0.8, 0.8, 0.8, 1, 1, 1])
@@ -95,7 +98,7 @@ if not is_psm:
         a[:, 2] = a[:, 2] - a[:, 1]
 
 #psm coupling
-if model_name == 'psm_simple_coupled':
+if coupling.shape[0]>0:
     b = copy.deepcopy(a)
     for i in range(a.shape[0]):
         b[i, 4] = 1.0186 * a[i, 4]
@@ -179,6 +182,16 @@ while i < len(a) and not rospy.is_shutdown():
     i = i + 1
 
 
+#Coupling revert
+if coupling.shape[0]>0:
+	motor_state = copy.deepcopy(states)
+	for i in range(coupling.shape[0]):
+
+	motor_state[i, 5:8] = np.linalg.inv(coupling) * states[i, 5:8]
+	motor_state[i, 12:15] = np.linalg.inv(coupling) *states[i, 12:15]
+	motor_state[i, 19:22] = np.linalg.inv(coupling) *states[i, 19:22] 
+	states = motor_state
+	
 # Save data
 data_file_dir = './data/' + model_name + '/measured_trajectory/' + testname + '_results.csv'
 

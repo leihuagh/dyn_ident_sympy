@@ -27,6 +27,7 @@ class FourierTraj:
         if math.isnan(float(frequency)):
             self.sample_num = self.order * self.sample_num_per_period + 1
             self.period = 1.0 / self.base_freq
+            self.frequency = self.sample_num/(final_time + stable_time)
         else:
             self.sample_num = frequency * (final_time + stable_time)
             self.period = final_time
@@ -47,9 +48,14 @@ class FourierTraj:
 
         for n in range(self.sample_num):
             self.fourier_q_base[n, 0] = 1
-            ramp_up = float(n)/float(self.stable_time * self.frequency)
-            if ramp_up > 1:
+
+            if not self.stable_time == 0:
+                ramp_up = float(n)/float(self.stable_time * self.frequency)
+                if ramp_up > 1:
+                    ramp_up = 1
+            else:
                 ramp_up = 1
+
             for o in range(self.order):
                 phase = 2 * np.pi * (o + 1) * self.t[n] * self.base_freq
 
