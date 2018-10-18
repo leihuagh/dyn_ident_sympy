@@ -45,7 +45,7 @@ sampling_time = 30
 sampling_rate = 500
 
 
-trajectory_name = 'four'
+trajectory_name = 'one'
 testname = trajectory_name
 
 model_folder = 'data/' + model_name + '/model/'
@@ -119,6 +119,7 @@ print("jonits_array: {}".format(jonits_array))
 
 #states = np.zeros((len(q), 3 * dof))
 start_cnt = int(sampling_rate*stable_time)
+
 max_state_num = len(q) - start_cnt
 states = np.zeros((max_state_num, 3 * dof))
 
@@ -182,8 +183,10 @@ while i < len(a) and not rospy.is_shutdown():
 if coupling.shape[0]>0:
 	motor_state = copy.deepcopy(states)
 	for i in range(coupling.shape[0]):
-		motor_state[i, 5:8] = np.matmul(np.linalg.inv(coupling), states[i, 5:8])
-		motor_state[i, 12:15] = np.matmul(np.linalg.inv(coupling), states[i, 12:15])
+	#for i in range(i):
+		motor_state[i, 4:7] = np.matmul(np.linalg.inv(coupling), states[i, 4:7])
+		motor_state[i, 11:14] = np.matmul(np.linalg.inv(coupling), states[i, 11:14])
+		motor_state[i, 18:22] = np.matmul(np.linalg.inv(coupling), states[i, 18:22])
 		states = motor_state
 	
 # Save data
