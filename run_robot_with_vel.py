@@ -93,8 +93,8 @@ if not is_psm:
 		a[:, 2] = a[:, 2] - a[:, 1]
 
 #psm coupling
+b = copy.deepcopy(a)
 if coupling.shape[0]>0:
-	b = copy.deepcopy(a)
 	for i in range(a.shape[0]):
 		b[i, 4] = 1.0186 * a[i, 4]
 		b[i, 5] = -0.8306 * a[i, 4] + 0.6089 * a[i, 5] + 0.6089 * a[i, 6]
@@ -149,7 +149,7 @@ while i < len(a) and not rospy.is_shutdown():
 			states[state_cnt][0:dof - 1] = p.get_current_joint_position()[0:dof-1]
 			states[state_cnt][dof-1] = p.get_current_jaw_position()
 
-			print('error', a[i,:] - states[state_cnt][0:dof])
+			#print('error', a[i,:] - states[state_cnt][0:dof])
 			
 			states[state_cnt][dof:dof*2 - 1] = p.get_current_joint_velocity()[0:dof-1]
 			states[state_cnt][dof*2 - 1] = p.get_current_jaw_velocity()
@@ -178,16 +178,14 @@ while i < len(a) and not rospy.is_shutdown():
 	r.sleep()
 	i = i + 1
 
-
 #Coupling revert
+motor_state = copy.deepcopy(states)
 if coupling.shape[0]>0:
-	motor_state = copy.deepcopy(states)
-	for i in range(coupling.shape[0]):
-	#for i in range(i):
+	for i in range(states.shape[0]):
 		motor_state[i, 4:7] = np.matmul(np.linalg.inv(coupling), states[i, 4:7])
 		motor_state[i, 11:14] = np.matmul(np.linalg.inv(coupling), states[i, 11:14])
 		motor_state[i, 18:22] = np.matmul(coupling.transpose(), states[i, 18:22])
-		states = motor_state
+	states = motor_state
 	
 # Save data
 data_file_dir = './data/' + model_name + '/measured_trajectory/' + testname + '_results.csv'
