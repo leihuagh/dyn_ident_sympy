@@ -16,6 +16,7 @@ def load_trajectory_data(file, freq):
     sample_num = row
     dof = col/3
 
+
     print(type(f), f.shape)
 
     t = np.array(range(sample_num), dtype=float) / freq
