@@ -376,7 +376,7 @@ def plot_meas_pred_tau(t, tau_m, tau_p, joint_type, coordinates):
             plt_tau.set_ylabel(r'$f_{}$ (N)'.format(coordinates[i].name[1:]))
         # plt_tau.legend(['Measured', "Predicted"])
         if i == 0:
-            plt_tau.legend(bbox_to_anchor=(0.2, 1.52, 0.8, .102), loc='upper center', ncol=3,
+            plt_tau.legend(bbox_to_anchor=(0.0, 1.52, 1.0, .102), loc='upper center', ncol=3,
                            mode="expand", borderaxespad=0.)
 
     plt.tight_layout()

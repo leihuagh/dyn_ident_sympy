@@ -148,6 +148,7 @@ class RobotDef:
                 self.joint_type.append("R")  # Revolute
             else:
                 self.joint_type.append("A")  # Assitive
+        # print(self.joint_type)
         #print(self.dh_T)
 
     def _gen_params(self):
